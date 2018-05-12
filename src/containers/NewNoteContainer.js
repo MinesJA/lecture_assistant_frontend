@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Grid } from 'semantic-ui-react'
+import { List, Grid, Segment } from 'semantic-ui-react'
 import NoteTextArea from '../components/NoteTextArea'
 import NoteTabs from '../components/NoteTabs'
 import NoteActions from '../components/NoteActions'
@@ -46,25 +46,20 @@ class NoteContainer extends Component {
     }
   }
 
-
-  handleTextInput = (e) => {
-    let specWordsAndSentObj = {};
-    let text = e.target.value
+  handleTextInput = (e, {value}) => {
     this.setState({
-      text
-    })
-    // Sets state with all incoming text
+      text: value}, ()=>{this.processText()})
+  }
 
+  processText = () => {
+    let specWordsAndSentObj = {};
+    let conditions = ["?", ".", "!"];
+    let textArray = this.state.text.split(" ");
 
-    let textArray = text.split(" ");
     if(textArray.length > 2){
-      let conditions = ["?", ".", "!"];
-      // 
-      let specialWordsArray = this.findSpecWords(textArray);
 
-      console.log("Identify Special Words: ", specialWordsArray);
-
-      specialWordsArray.forEach((specWord)=>{
+      let specWords = this.findSpecWords(textArray)
+      specWords.forEach((specWord)=>{
         specWordsAndSentObj[specWord] = [];
 
         let indexArray = this.returnMatchIndexes(textArray, specWord);
@@ -84,11 +79,10 @@ class NoteContainer extends Component {
           }
         })
       })
-      console.log(specWordsAndSentObj)
 
       this.setState({
         specialLines: specWordsAndSentObj
-      }, ()=>{console.log(this.state.specialLines)})
+      })
     }
   }
 
@@ -107,16 +101,35 @@ class NoteContainer extends Component {
 
   findSpecWords = (textArray) => {
     // Finds all words that start with a # and are all uppercase
-
-    let specWords = textArray.filter((word)=>{
+    return textArray.filter((word)=>{
       return word.includes("#")
         &&
       word.split("").slice(1).join("") === word.split("").slice(1).join("").toUpperCase()
         &&
       word.length > 2
     })
+  }
 
-    return specWords;
+  renderTabsOrInstructions = () => {
+    if (Object.keys(this.state.specialLines).length > 0){
+      return <NoteTabs specialLines={this.state.specialLines}/>
+    }else{
+
+      return(
+      <Segment padded='very'>
+        <strong>Instructions</strong>
+        <br></br>
+        Heres how to use LectureAssistant:
+
+        <List ordered>
+          <List.Item>Type normally like you would a regular text editor.</List.Item>
+          <List.Item>If you want to start a new list like "Questions" just start the name of the list you want to write with a hashtag and capitlize all letters like so: #QUESTIONS. You should see it appear as a tab header to the right of the editor.</List.Item>
+          <List.Item>Everything you write after the new label and before a period, question mark or exclamation point will be added to the tab as an item.</List.Item>
+          <List.Item>When youre finished with your note, you can save it to work on later, submit it to your lists, or wipe it and start fresh by click new.</List.Item>
+        </List>
+
+      </Segment>)
+    }
   }
 
 
@@ -141,7 +154,7 @@ class NoteContainer extends Component {
             <NoteTextArea handleTextInput={this.handleTextInput}/>
           </Grid.Column>
           <Grid.Column>
-            <NoteTabs specialLines={this.state.specialLines}/>
+            {this.renderTabsOrInstructions()}
           </Grid.Column>
           <Grid.Column width={1} />
         </Grid.Row>
@@ -149,13 +162,12 @@ class NoteContainer extends Component {
         <Grid.Row>
           <Grid.Column width={1} />
 
-
           <Grid.Column width={8}>
             <NoteActions />
           </Grid.Column>
 
           <Grid.Column>
-            Hello world
+
           </Grid.Column>
           <Grid.Column width={1} />
         </Grid.Row>
