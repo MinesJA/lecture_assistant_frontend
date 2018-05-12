@@ -2,17 +2,17 @@ import React from 'react';
 import { Button } from 'semantic-ui-react'
 
 
-const NoteActions = () => {
+const NoteActions = (props) => {
 
   const handleClick = (e) => {
-    console.log(e.target.value)
+    props.handleActions(e.target.id)
   }
 
   return(
     <Button.Group>
-      <Button content="New" onClick={handleClick} />
-      <Button content="Save" onClick={handleClick} />
-      <Button content="Submit" onClick={handleClick} />
+      <Button content="New" id="new" onClick={handleClick} />
+      <Button content="Save" id="save" onClick={handleClick} />
+      <Button content="Submit" id="submit" onClick={handleClick} />
     </Button.Group>
   )
 }

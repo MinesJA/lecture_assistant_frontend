@@ -132,6 +132,14 @@ class NoteContainer extends Component {
     }
   }
 
+  handleActions = (button_id) => {
+    // case(button_id)
+    //
+    // when
+    console.log(button_id)
+    console.log(this.state)
+  }
+
 
   render(){
     return(
@@ -151,7 +159,7 @@ class NoteContainer extends Component {
         <Grid.Row>
           <Grid.Column width={1}  />
           <Grid.Column width={8}  >
-            <NoteTextArea handleTextInput={this.handleTextInput}/>
+            <TextArea autoHeight onChange={this.handleTextInput} placeholder='Try adding multiple lines' rows={10} />
           </Grid.Column>
           <Grid.Column>
             {this.renderTabsOrInstructions()}
@@ -163,7 +171,7 @@ class NoteContainer extends Component {
           <Grid.Column width={1} />
 
           <Grid.Column width={8}>
-            <NoteActions />
+            <NoteActions handleActions={this.handleActions} />
           </Grid.Column>
 
           <Grid.Column>
@@ -177,4 +185,9 @@ class NoteContainer extends Component {
   }
 }
 
-export default NoteContainer
+function mapDispatchToProps = () => {
+
+
+}
+
+export default connect(null, mapDispatchToProps)(NoteContainer)
