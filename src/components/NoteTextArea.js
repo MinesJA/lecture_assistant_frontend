@@ -1,19 +1,11 @@
 import React from 'react'
-import { Card, Form, TextArea, Input } from 'semantic-ui-react'
+import { Form, TextArea } from 'semantic-ui-react'
 
-const NoteTextArea = (props) => {
+const NoteTextArea = (props) => (
+  <Form>
+    <TextArea autoHeight onChange={props.handleTextInput} placeholder='Try adding multiple lines' rows={10} />
+  </Form>
+)
 
-
-
-  return(
-
-    <Form>
-      <TextArea autoHeight onChange={props.handleTextInput} placeholder='Try adding multiple lines' rows={10} />
-    </Form>
-
-
-  )
-
-}
 
 export default NoteTextArea

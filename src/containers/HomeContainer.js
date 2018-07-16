@@ -7,6 +7,10 @@ import NotesList from '../components/NotesList'
 
 class HomeContainer extends Component {
 
+  compoenntDidMount(){
+    fetch()
+  }
+
 
 
   render(){

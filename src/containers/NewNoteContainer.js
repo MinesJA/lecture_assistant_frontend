@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
-import { List, Grid, Segment } from 'semantic-ui-react'
+import { Grid } from 'semantic-ui-react'
 import NoteTextArea from '../components/NoteTextArea'
 import NoteTabs from '../components/NoteTabs'
 import NoteActions from '../components/NoteActions'
 import NoteDetailsInput from '../components/NoteDetailsInput'
+import Instructions from '../components/Instructions'
 
 
 class NoteContainer extends Component {
@@ -43,12 +44,16 @@ class NoteContainer extends Component {
           topic: input
         })
       break;
+
+      default:
+        console.log("NO MATCH")
     }
   }
 
   handleTextInput = (e, {value}) => {
     this.setState({
-      text: value}, ()=>{this.processText()})
+      text: value
+    }, ()=>{this.processText()})
   }
 
   processText = () => {
@@ -114,23 +119,31 @@ class NoteContainer extends Component {
     if (Object.keys(this.state.specialLines).length > 0){
       return <NoteTabs specialLines={this.state.specialLines}/>
     }else{
-
-      return(
-      <Segment padded='very'>
-        <strong>Instructions</strong>
-        <br></br>
-        Heres how to use LectureAssistant:
-
-        <List ordered>
-          <List.Item>Type normally like you would a regular text editor.</List.Item>
-          <List.Item>If you want to start a new list like "Questions" just start the name of the list you want to write with a hashtag and capitlize all letters like so: #QUESTIONS. You should see it appear as a tab header to the right of the editor.</List.Item>
-          <List.Item>Everything you write after the new label and before a period, question mark or exclamation point will be added to the tab as an item.</List.Item>
-          <List.Item>When youre finished with your note, you can save it to work on later, submit it to your lists, or wipe it and start fresh by click new.</List.Item>
-        </List>
-
-      </Segment>)
+      return <Instructions />
     }
   }
+
+  handleClick = (e) => {
+    switch(e.target.value){
+      case "new":
+
+        break;
+      case "save":
+
+        break;
+      case "submit":
+        fetch('http:')
+
+
+
+        debugger
+        break;
+      default:
+        console.log("NO MATCH")
+    }
+  }
+
+
 
 
   render(){
@@ -140,7 +153,13 @@ class NoteContainer extends Component {
         <Grid.Row>
           <Grid.Column width={1}  />
           <Grid.Column width={8} >
-            <NoteDetailsInput handleDetailsInput={this.handleDetailsInput} />
+            <NoteDetailsInput
+              handleDetailsInput={this.handleDetailsInput}
+              topic={this.state.topic}
+              date={this.state.date}
+              professor={this.state.professor}
+              location={this.state.location}
+            />
           </Grid.Column>
           <Grid.Column>
 
@@ -163,7 +182,7 @@ class NoteContainer extends Component {
           <Grid.Column width={1} />
 
           <Grid.Column width={8}>
-            <NoteActions />
+            <NoteActions handleClick={this.handleClick}/>
           </Grid.Column>
 
           <Grid.Column>
