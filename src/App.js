@@ -18,8 +18,9 @@ class App extends Component {
       <div>
         <NavBar />
         <Route path="/" exact component={HomeContainer} />
-        <Route path="/users/:id/notes" exact component={MyNotesContainer} />
-        <Route path="/notes/new" exact component={NewNoteContainer} />
+        <Route path="/notes" exact component={MyNotesContainer} />
+        <Route path="/notes/:id" component={MyNotesContainer} />
+        <Route exact path="/notes/new" component={NewNoteContainer} />
         <Route path="/lists" exact component={MyListsContainer} />
         <Route path="/signup" exact component={SignupContainer} />
         <Route path="/login" exact component={LoginContainer} />

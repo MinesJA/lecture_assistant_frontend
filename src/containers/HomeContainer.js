@@ -24,7 +24,7 @@ class HomeContainer extends Component {
           </Grid.Column>
           <Grid.Column width = {1}/>
           <Grid.Column width = {6}>
-            {/* Put ListsList here */}
+            
             <NotesList />
           </Grid.Column>
           <Grid.Column width = {1}/>

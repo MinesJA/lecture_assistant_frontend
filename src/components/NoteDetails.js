@@ -5,11 +5,9 @@ import NoteItem from './NoteItem'
 import UUID from 'uuid'
 
 
-const NotesList = (props) => {
+const NoteDetails = (props) => {
 
-  // const renderNoteItems = () => {
-  //   return
-  // }
+  
 
   return(
     <Fragment>
@@ -25,4 +23,4 @@ const NotesList = (props) => {
   )
 }
 
-export default NotesList
+export default NoteDetails

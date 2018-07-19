@@ -17,7 +17,7 @@ class NavBar extends Component {
           <img src={require('../images/logo.png')} alt="logo" />
         </Menu.Item>
         <Menu.Item name='home' as={NavLink} exact to="/" active={activeItem === 'home'} onClick={this.handleItemClick} />
-        <Menu.Item name='myNotes' as={NavLink} exact to="/users/:id/notes" active={activeItem === 'myNotes'} onClick={this.handleItemClick} />
+        <Menu.Item name='myNotes' as={NavLink} exact to="/notes" active={activeItem === 'myNotes'} onClick={this.handleItemClick} />
         <Menu.Item name='newNote' as={NavLink} exact to="/notes/new" active={activeItem === 'newNote'} onClick={this.handleItemClick} />
         <Menu.Item name='allLists' as={NavLink} exact to="/lists" active={activeItem === 'allLists'} onClick={this.handleItemClick} />
         <Menu.Menu position='right'>

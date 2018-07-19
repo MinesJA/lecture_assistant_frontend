@@ -1,26 +1,12 @@
 import React from 'react'
 import { Button, List, Icon } from 'semantic-ui-react'
 import Moment from 'react-moment';
-
-
-// "id": 1,
-//   "title": "RW6",
-//   "topic": "they're good dogs Brent",
-//   "professor": "Reginald Cattermole",
-//   "location": "945 Grove St Apt. 20",
-//   "full_text":
-//   "user_id": 1,
-//   "created_at": "2018-05-28T23:02:55.240Z",
-//   "updated_at": "2018-05-28T23:02:55.306Z"
+import { Link } from 'react-router-dom'
 
 
 const NoteItem = (props) => {
-
-  console.log("NoteItem Props: ", props)
-  let { topic, professor, location, full_text, user_id, created_at, updated_at } = props.note
-
-
-
+  let { id, title, topic, professor, location, full_text, user_id, created_at, updated_at, details } = props.note
+  let link_path = `/notes/${id}`
 
 
   return(
@@ -47,13 +33,13 @@ const NoteItem = (props) => {
 
       </List.Content>
 
-      <List.Content floated='left'>
-        <Button>VIEW</Button>
-      </List.Content>
-
       <List.Content>
         <List.Header>
-          {topic}
+          <Link to={link_path}>
+            Title: {title}
+            <br/>
+            Topic: {topic}
+          </Link>
         </List.Header>
         <List.Description>
           <small>Professor {professor} | Location: {location}</small>
