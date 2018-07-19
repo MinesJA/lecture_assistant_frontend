@@ -5,12 +5,10 @@ import NoteItem from './NoteItem'
 
 
 const NotesList = (props) => {
-
-  const renderNoteItems = () => {
-    return props.notes.map ((note)=>(
-      <NoteItem noteInfo={note}/>
-    ))
-  }
+  // debugger
+  // const renderNoteItems = () => {
+  //   return
+  // }
 
   return(
     <div>
@@ -18,7 +16,7 @@ const NotesList = (props) => {
 
         <Segment>
           <List divided verticalAlign='middle' size="large" >
-            {renderNoteItems}
+            { props.notes ? props.notes.map ( note => <NoteItem note={note}/> ) : null }
           </List>
         </Segment>
 

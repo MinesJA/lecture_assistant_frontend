@@ -1,8 +1,29 @@
 import React from 'react'
 import { Button, List, Icon } from 'semantic-ui-react'
+import Moment from 'react-moment';
 
 
-const NoteItem = (props) => (
+// "id": 1,
+//   "title": "RW6",
+//   "topic": "they're good dogs Brent",
+//   "professor": "Reginald Cattermole",
+//   "location": "945 Grove St Apt. 20",
+//   "full_text":
+//   "user_id": 1,
+//   "created_at": "2018-05-28T23:02:55.240Z",
+//   "updated_at": "2018-05-28T23:02:55.306Z"
+
+
+const NoteItem = (props) => {
+
+  console.log("NoteItem Props: ", props)
+  let { topic, professor, location, full_text, user_id, created_at, updated_at } = props.note
+
+
+
+
+
+  return(
     <List.Item>
       <List.Content floated='right'>
 
@@ -25,16 +46,24 @@ const NoteItem = (props) => (
         </Button>
 
       </List.Content>
-        <Icon name="pencil square" size="big"/>
+
+      <List.Content floated='left'>
+        <Button>VIEW</Button>
+      </List.Content>
+
       <List.Content>
         <List.Header>
-          {props.noteInfo.noteTopic}
+          {topic}
         </List.Header>
         <List.Description>
-          <small>{props.noteInfo.updatedOn}</small>
+          <small>Professor {professor} | Location: {location}</small>
+          <br/>
+          <small>Updated at: <Moment format="DD/MM/YYYY">{updated_at}</Moment></small>
         </List.Description>
       </List.Content>
     </List.Item>
+
   )
+}
 
 export default NoteItem
