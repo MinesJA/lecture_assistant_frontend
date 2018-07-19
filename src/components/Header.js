@@ -1,14 +1,14 @@
 import React from 'react'
 import { Header, Icon, Segment } from 'semantic-ui-react'
 
-const HomeHeader = () => (
+const HomeHeader = (props) => (
   <Segment>
     <Header as='h2'>
-      <Icon name='pencil' />
+      <Icon name={props.icon} />
       <Header.Content>
-        My Notes
+        {props.headerText}
         <Header.Subheader>
-          See your recent notes below
+          {props.subheader}
         </Header.Subheader>
       </Header.Content>
     </Header>

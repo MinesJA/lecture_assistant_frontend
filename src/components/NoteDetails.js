@@ -1,26 +1,68 @@
 import React, { Fragment } from 'react'
-import { List, Segment } from 'semantic-ui-react'
-import HomeHeader from './HomeHeader'
+import { List, Segment, Card, Grid, Header, Icon, Item, Button, Divider, Container } from 'semantic-ui-react'
+import { connect } from 'react-redux'
 import NoteItem from './NoteItem'
-import UUID from 'uuid'
-
 
 const NoteDetails = (props) => {
 
-  
+  console.log("NoteDetails: ", props)
+
+
+  let {id, topic, professor, title, full_text, created_at} = props.notes.find((note)=> note.id == props.note)
+
 
   return(
-    <Fragment>
-      <HomeHeader/>
+    <Segment>
+      <Grid columns='equal' >
+        <Grid.Row>
+          <Segment basic clearing>
+            <h3>Title: {title}</h3>
+            <h3>Topic: {topic}</h3>
+            <h3>Professor: {professor}</h3>
+            <h3>Date: {created_at}</h3>
 
-        <Segment>
-          <List divided verticalAlign='middle' size="large" >
-            { props.notes ? props.notes.map ( note => <NoteItem details={props.details} note={note} key={UUID()}/> ) : null }
-          </List>
-        </Segment>
+            <List.Content floated='right'>
+              <Button animated size="small">
+                <Button.Content visible >
+                  <Icon name="edit"/>
+                </Button.Content>
+                <Button.Content hidden>
+                  Edit
+                </Button.Content>
+              </Button>
+              <Button animated size="small">
+                <Button.Content visible>
+                  <Icon name="delete"/>
+                </Button.Content>
+                <Button.Content hidden>
+                  Delete
+                </Button.Content>
+              </Button>
+            </List.Content>
+          </Segment>
 
-    </Fragment>
+        </Grid.Row>
+        
+        <Divider />
+
+        <Grid.Row>
+          <Container>
+            {full_text}
+          </Container>
+        </Grid.Row>
+
+        <Grid.Row>
+
+        </Grid.Row>
+      </Grid>
+    </Segment>
   )
 }
 
-export default NoteDetails
+function mapStateToProps(state){
+  return {
+    notes: state.Notes.notes
+  }
+}
+
+export default connect(mapStateToProps)(NoteDetails)

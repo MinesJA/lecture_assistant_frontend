@@ -3,7 +3,7 @@ import { FETCH_NOTES, SELECT_NOTE, NOTE_LOADING } from '../actions/noteActions'
 const initialState = {
   notesLoading: false,
   notes: [],
-  selectedNote: null
+  selectedNote: ""
 }
 
 export default function Notes(state = initialState, action){
@@ -15,7 +15,7 @@ export default function Notes(state = initialState, action){
       return Object.assign({}, state, {notes: action.payload.notes, notesLoading: false})
 
     case SELECT_NOTE:
-      return Object.assign({}, state, {selectedNote: action.playload})
+      return Object.assign({}, state, {selectedNote: action.payload})
 
     default:
       return state
